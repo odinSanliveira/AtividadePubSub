@@ -2,11 +2,8 @@ from confluent_kafka import Consumer, KafkaError
 import json
 import logging
 import telegram
-
+from config import api_key
 #telegram bot configuration
-api_key = '5359525154:AAE3LkUbNZF2VhWw7Ua_0Wrce9gdOSp7Pek'
-user_id = '1456647874'
-
 bot = telegram.Bot(token=api_key)
 # bot.send_message(chat_id=user_id, text='kafka-test-bot is working!')
 
