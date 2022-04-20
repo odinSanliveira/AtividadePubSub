@@ -37,16 +37,18 @@ c = Consumer({
 c.subscribe(['image'])
 TOPIC = 'notification'
 #{"timestamp": 1649288146.3453217, "new_file": "9PKAyoN.jpeg"}
-def publish(topic, filename):
+def publish(topic, filename, email, username):
     p = Producer({'bootstrap.servers': 'kafka1:19091,kafka2:19092,kafka3:19093'})
-    p.produce(topic, key=str(uuid4()), value=get_json_str(time.time(), filename, 'grayscale'), on_delivery=delivery_report)
+    p.produce(topic, key=str(uuid4()), value=get_json_str(time.time(), filename, 'grayscale', email, username), on_delivery=delivery_report)
     p.flush()
 
-def get_json_str(timestamp, filename, method):
+def get_json_str(timestamp, filename, method, email, username):
     d = {
         'timestamp': timestamp,
         'new_file': filename,
         'method': method,
+        'email': email,
+        'username': username
     }
     return json.dumps(d)
 
@@ -67,6 +69,8 @@ try:
         elif not msg.error():
             data = json.loads(msg.value())
             filename = data['new_file']
+            email = data['email']
+            username = data['username']
             logging.warning(f"READING {filename}")
             create_grayscale(IN_FOLDER + filename)
             publish(TOPIC, filename)

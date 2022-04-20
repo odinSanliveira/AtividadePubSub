@@ -2,3 +2,5 @@
 /data
 
 config.py
+__pycache__
+.env
