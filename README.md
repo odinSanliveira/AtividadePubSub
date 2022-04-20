@@ -46,6 +46,6 @@ Ao terminar os experimentos, lembre-se de executar ```docker-compose down```
 
 # Atenção!
 É necessário criar o arquivo *config.py* na pasta "notificator-app" com as seguinte variáveis:
-api_key: Com o valor da API Bot do telegram.
-email_sender: O email responsável para enviar as notificações.
-password: senha do email.
+- api_key: Com o valor da API Bot do telegram.
+- email_sender: O email responsável para enviar as notificações.
+- password: senha do email.
